@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DataActivity">
+
+    <EditText
+        android:id="@+id/Id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Id" />
+
+    <EditText
+        android:id="@+id/addressData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Id"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Address" />
+
+    <EditText
+        android:id="@+id/latiData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressData"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Latitude" />
+
+    <EditText
+        android:id="@+id/longiData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/latiData"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Longitude" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/longiData"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="160dp"
+        android:text="Update" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/update"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="160dp"
+        android:text="Delete" />
+
+</RelativeLayout>
