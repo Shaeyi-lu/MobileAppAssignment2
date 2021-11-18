@@ -48,34 +48,32 @@ public class MainActivity extends AppCompatActivity {
         result.setVisibility(View.GONE);
 
 
-
-
-
         geocoder = new Geocoder(this);
         boolean parse = true;
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //turns input views to strings
                 String latitudeVal = latitude.getText().toString();
                 String longitudeVal = longitude.getText().toString();
                 String idVal = id.getText().toString();
 
-
+                //converts it to Double
                 Double lati = Double.parseDouble(latitudeVal);
                 Double longi = Double.parseDouble(longitudeVal);
 
-                List<Address> geoResult = findGeocoder(lati, longi);
+                List<Address> geoResult = findGeocoder(lati, longi); //calls method created to initialize results
                 if(geoResult != null){
-                    DBHelper DB = new DBHelper(MainActivity.this);
+                    DBHelper DB = new DBHelper(MainActivity.this);//object of database
 
-                   addr = geoResult.get(0).getAddressLine(0);
-                   DB.addData(idVal, addr, lati, longi);
+                   addr = geoResult.get(0).getAddressLine(0); //gets the address as  string
+                   DB.addData(idVal, addr, lati, longi);//adds data to the database
 
 
                 }
 
-                result.setVisibility(View.VISIBLE);
+                result.setVisibility(View.VISIBLE); //displays result once button clicked
                 result.setText("Address: " + addr );
 
             }
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         viewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DataActivity.class);
+                Intent intent = new Intent(MainActivity.this, DataActivity.class); //goes to next page
                 startActivity(intent);
                 finish();
             }
@@ -96,9 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Address> findGeocoder(Double latitude, Double longitude){
 
+
         List<Address> address = null;
         try{
-            address = geocoder.getFromLocation(latitude, longitude, 1);
+            address = geocoder.getFromLocation(latitude, longitude, 1); //created object of geocode and obtained latitude and longitude using location services
         }
         catch (IOException e){
             e.printStackTrace();

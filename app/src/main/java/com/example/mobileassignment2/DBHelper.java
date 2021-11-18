@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     Context context;
     private static final String TableName="location";
-    private static final String Id="Id";
     private static final String Address="Address";
     private static final String Latitude="Latitude";
     private static final String Longitude="Longitude";
@@ -25,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        String lookup = "CREATE TABLE " + TableName +" (" + Id + " TEXT PRIMARY KEY AUTOINCREMENT, "+
+        String lookup = "CREATE TABLE " + TableName +" (id TEXT PRIMARY KEY, "+
                 Address + " TEXT, " +
                 Latitude + " REAL, " +
                 Longitude + " REAL);";
@@ -47,10 +46,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long result = DB.insert(TableName, null, contentValues);
         if(result == -1){
-            Toast.makeText(context, "Data Not Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Data Not Added", Toast.LENGTH_SHORT).show(); //message if successful
         }
         else{
-            Toast.makeText(context, "Data Added Succssfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Data Added Succssfully", Toast.LENGTH_SHORT).show(); //message if not successful
         }
 
     }
@@ -62,9 +61,9 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(Latitude, latitude);
         contentValues.put(Longitude, longitude);
 
-        Cursor cursor = DB.rawQuery("SELECT * FROM "+ TableName + " WHERE " + Id + " = ?", new String[]{id});
+        Cursor cursor = DB.rawQuery("SELECT * FROM "+ TableName + " WHERE id = ?", new String[]{id});
         if(cursor.getCount()>0) {
-            long result = DB.update(TableName, contentValues, Id + "=?", new String[]{id});
+            long result = DB.update(TableName, contentValues,  "id=?", new String[]{id});//uses id to locate data to update
             if (result == -1) {
                 return false;
             } else {
@@ -79,9 +78,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public Boolean deleteData(String id){
         SQLiteDatabase DB = this.getWritableDatabase();
 
-        Cursor cursor = DB.rawQuery("SELECT * FROM "+ TableName + " WHERE " + Id + " = ?", new String[]{id});
+        Cursor cursor = DB.rawQuery("SELECT * FROM "+ TableName + " WHERE id = ?", new String[]{id});//uses id to locate data to delete
         if(cursor.getCount()>0) {
-            long result = DB.delete(TableName,  Id +"=?", new String[]{id});
+            long result = DB.delete(TableName,  "id=?", new String[]{id});
             if (result == -1) {
                 return false;
             } else {
